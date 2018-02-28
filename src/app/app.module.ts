@@ -13,6 +13,8 @@ import { AvailableCarsComponent } from '../components/available-cars/available-c
 import { CarService } from '../providers/car/car';
 import { SimulateService } from '../providers/simulate/simulate';
 import { PickupCarComponent } from '../components/pickup-car/pickup-car';
+import { PickupPubSubService } from '../providers/pickup-pub-sub/pickup-pub-sub';
+import { DestinationAddresComponent } from '../components/destination-addres/destination-addres';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { PickupCarComponent } from '../components/pickup-car/pickup-car';
     MapsComponent,
     PickupComponent,
     AvailableCarsComponent,
-    PickupCarComponent
+    PickupCarComponent,
+    DestinationAddresComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +37,8 @@ import { PickupCarComponent } from '../components/pickup-car/pickup-car';
     MapsComponent,
     PickupComponent,
     AvailableCarsComponent,
-    PickupCarComponent
+    PickupCarComponent,
+    DestinationAddresComponent
   ],
   providers: [
     StatusBar,
@@ -42,7 +46,8 @@ import { PickupCarComponent } from '../components/pickup-car/pickup-car';
     Geolocation,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     CarService,
-    SimulateService
+    SimulateService,
+    PickupPubSubService
   ]
 })
 export class AppModule {}

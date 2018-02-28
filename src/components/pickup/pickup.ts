@@ -1,4 +1,6 @@
-import { Component, Input, OnChanges, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnChanges, Output, EventEmitter, OnInit } from '@angular/core';
+import { PickupPubSubService } from '../../providers/pickup-pub-sub/pickup-pub-sub';
+import { Observable } from 'rxjs/Observable';
 
 declare var google : any;
 
@@ -7,29 +9,53 @@ declare var google : any;
   selector: 'pickup',
   templateUrl: 'pickup.html'
 })
-export class PickupComponent implements OnChanges {
+export class PickupComponent implements OnInit, OnChanges {
   @Input() isPinSet :boolean ;
   @Input() map  ;
+  @Input() isPickupRequested;
+  @Input() destination;
   @Output() updatedPickupLocation : EventEmitter<any> = new EventEmitter();
 
   private pickupMarker;
   private popup;
+  private pickupSubscription;
 
-  constructor() {
+  constructor(private pickupPubSubService : PickupPubSubService) {
     console.log('Hello PickupComponent Component');
   }
 
-  ngOnChanges(changes){
+  ngOnInit(){
+    this.pickupSubscription = this.pickupPubSubService.watch().subscribe(e=>{
+      if(e.event === this.pickupPubSubService.EVENTS.ARRIVAL_TIME){
+        this.updateTime(e.data);
+      }
+    })
+  }
 
-    if(this.isPinSet){
-      this.showPickupMarker();
+  ngOnChanges(changes){
+    
+    //do not allow pickup pin/location
+    //to change if pickup is requested
+
+    if(!this.isPickupRequested){
+      if(this.isPinSet){
+        this.showPickupMarker();
+      }
+      else{
+        this.hidePickupMarker();
+      }
     }
-    else{
+
+    if(this.destination){
+
       this.hidePickupMarker();
     }
+
   }
 
   showPickupMarker(){
+
+    this.hidePickupMarker();
 
     this.pickupMarker =  new google.maps.Marker({
       map : this.map,
@@ -65,5 +91,10 @@ export class PickupComponent implements OnChanges {
     google.maps.event.addListener(this.pickupMarker, 'click', () =>{
       this.popup.open(this.map, this.pickupMarker);
     });
+  }
+
+  updateTime(seconds){
+    let minutes = Math.floor(seconds/60);
+    this.popup.setContent(`<h5>${minutes} minutes</h5>`);
   }
 }

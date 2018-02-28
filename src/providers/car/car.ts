@@ -10,6 +10,22 @@ export class CarService {
     console.log('Hello CarProvider Provider');
   }
 
+  pollForRiderPickup(){
+    return this.simulateService.riderPickUp();
+  }
+
+  pollForRiderDropOff(){
+    return this.simulateService.riderDropprdOff();
+  }
+
+  dropoffCar(pickupLocation, dropoffLocation){
+    return this.simulateService.dropoffPickupCar(pickupLocation, dropoffLocation)
+  }
+
+  getPickupCar(){
+
+    return this.simulateService.getPickupCar();
+  }
 
   getCars(lat, lng){
     return Observable

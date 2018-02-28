@@ -13,8 +13,16 @@
 
 <ion-content >
   <div class="map-wrapper">
-    <maps #map [isPickupRequested]="isPickupRequested"></maps>
+    <maps #map 
+        [isPickupRequested]="isPickupRequested"
+        [destination]="destination">
+    </maps>
   </div>
+  <destination-addres
+  [hidden] = "!isRiderPickedUp"
+  (newDest) = "setDestination($event)">
+  </destination-addres>
+
   <div class="bottom request-controls">
     <ion-row>
       <ion-col col-6>
@@ -38,7 +46,7 @@
     </ion-row>
     <ion-row>
         <ion-col>
-          PICKUP TIME IS APPROXIMATELY 5 MN
+          PICKUP TIME IS APPROXIMATELY {{timeTillArrival}} MN
         </ion-col>
     </ion-row>
   </div>

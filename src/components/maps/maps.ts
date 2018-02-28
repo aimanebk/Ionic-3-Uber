@@ -11,6 +11,7 @@ declare var google : any;
 export class MapsComponent implements OnInit{
 
   @Input() isPickupRequested : boolean;
+  @Input() destination;
 
   public map;
   public isMapIdle : boolean;

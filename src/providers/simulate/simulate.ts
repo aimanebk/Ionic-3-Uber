@@ -14,6 +14,16 @@ export class SimulateService {
     this.directionsService =  new google.maps.DirectionsService();
   }
 
+  riderPickUp(){
+    //simulate rider picked up after 1second
+    return Observable.timer(1000)
+  }
+
+  riderDropprdOff(){
+      //simulate rider dropped off after 1second
+      return Observable.timer(1000)
+  }
+
   getPickupCar(){
 
     return new Observable(observable => {
@@ -105,6 +115,10 @@ export class SimulateService {
     return this.simulateRoute(start, end);
   }
   
+  dropoffPickupCar(pickuplocation , dropoffLocation){
+    return this.simulateRoute(pickuplocation, dropoffLocation);
+  }
+
   getCars(lat, lng){
     
     let carData = this.cars[this.carIndex];

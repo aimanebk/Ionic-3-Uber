@@ -4,6 +4,8 @@
   <pickup 
     [map]="map" 
     [isPinSet]="isMapIdle"
+    [isPickupRequested]="isPickupRequested"
+    [destination]="destination"
     (updatedPickupLocation)="updatePickupLocation($event)">
   </pickup>
 
@@ -15,6 +17,7 @@
   <pickup-car
   [map]="map"
   [isPickupRequested] = "isPickupRequested"
-  [pickupLocation]= "currentLocation">
+  [pickupLocation]= "currentLocation"
+  [destination]="destination">
   </pickup-car>
 </div>
