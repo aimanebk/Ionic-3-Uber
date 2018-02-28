@@ -1,14 +1,45 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Ionic Blank
+      PickMeUp
     </ion-title>
+    <ion-buttons end>
+      <button (click)="map.centerLocation()">
+        <ion-icon  name="navigate"></ion-icon>
+      </button>
+  </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+<ion-content >
+  <div class="map-wrapper">
+    <maps #map [isPickupRequested]="isPickupRequested"></maps>
+  </div>
+  <div class="bottom request-controls">
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button color="light">
+          <ion-icon name="card"></ion-icon>
+          Visa **85
+        </button>
+      </ion-col>
+      <ion-col col-6>
+        <button ion-button color="light">
+          <ion-icon name="cash"></ion-icon>
+          Cash
+        </button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <button [hidden]="isPickupRequested" ion-button primary  (click)="confirmPickup()">Request Pickup</button>  
+        <button [hidden]="!isPickupRequested" ion-button primary  (click)="cancelPickup()">Cancel Pickup</button>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+        <ion-col>
+          PICKUP TIME IS APPROXIMATELY 5 MN
+        </ion-col>
+    </ion-row>
+  </div>
 </ion-content>
