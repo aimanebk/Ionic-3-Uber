@@ -1,7 +1,7 @@
 # Ionic-3-Uber
 A simple Uber clone app using Ionic 3 called pickUpMe. based on doorty "Ionic-2-Uber" code
 
-# Steps
+## Steps
 
 Clone this repo
 
@@ -9,7 +9,7 @@ npm install
 
 ionic server -l
 
-# important
+#" important
 
 This code is an upgrade from Ionic2 to Ionic3
 
