@@ -9,7 +9,7 @@ npm install
 
 ionic server -l
 
-#" important
+## important
 
 This code is an upgrade from Ionic2 to Ionic3
 
